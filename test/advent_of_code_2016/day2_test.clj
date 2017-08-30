@@ -5,4 +5,4 @@
 (deftest day2-test
   (testing "case 1"
     (let [instructions ["ULL" "RRDDD" "LURDL" "UUUUD"]]
-      (is (= '(1 9 8 5) (solve-code instructions))))))
+      (is (= '(5 \D \B 3) (solve-code instructions))))))

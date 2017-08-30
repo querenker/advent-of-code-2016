@@ -1,9 +1,13 @@
 (ns advent-of-code-2016.day2
   (:require [clojure.string :as str]))
 
-(def keypad [[1 2 3] [4 5 6] [7 8 9]])
+(def keypad [[nil nil 1   nil nil]
+             [nil 2   3   4   nil]
+             [5   6   7   8   9]
+             [nil \A  \B  \C  nil]
+             [nil nil \D  nil nil]])
 
-(def current-position (atom [1 1]))
+(def current-position (atom [2 0]))
 
 (def movements {\R (fn [[x y]] [x (inc y)])
                 \U (fn [[x y]] [(dec x) y])
@@ -13,7 +17,7 @@
 (defn perform-movement [movement]
   (let [movement-fun (get movements movement)
         new-position (movement-fun @current-position)]
-    (when (= (map <= [0 0] new-position [2 2]) [true true])
+    (when-not (nil? (get-in keypad new-position))
       (swap! current-position movement-fun))))
 
 (defn walk-movement-path [movement-path]
