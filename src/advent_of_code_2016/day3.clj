@@ -21,5 +21,8 @@
     clojure.java.io/resource
     load-data
     (map clear-triangle-data)
+    (apply map list)
+    flatten
+    (partition 3)
     (filter valid-triangle?)
     count)
