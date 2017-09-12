@@ -2,15 +2,11 @@
   (:require [clojure.string :as str]
             [clojure.set :as set]))
 
-(def digit-chars (set (map char (range (int \0) (inc (int \9))))))
-
-(defn room-parts [char]
+(defn room-parts [character]
+  (let [digit-chars (set (map char (range (int \0) (inc (int \9)))))]
   (cond
-    (contains? digit-chars char) :sector-id
-    (contains? #{\[ \]} char) :checksum-parenthesis))
-
-(def room "aaaaa-bbb-z-y-x-123[abxyz]")
-(partition-by room-parts room)
+    (contains? digit-chars character) :sector-id
+    (contains? #{\[ \]} character) :checksum-parenthesis)))
 
 (defn parse-room-data [room-data]
   (let [cleaned-room-data (str/replace room-data #"-" "")
@@ -25,6 +21,18 @@
        (map first)
        (= checksum)))
 
+(defn decrypt-shift-cipher [message rotations]
+  (let [alphabet (apply str (map char (range (int \a) (inc (int \z)))))]
+    (->> message
+         (map (fn [char]
+                (case char
+                  \- \-
+                  (nth (cycle alphabet) (+ rotations (.indexOf alphabet (str char))))))))))
+
+(defn decrypt-room [room]
+  (let [[room-name sector-id _] room]
+    (assoc room 0 (decrypt-shift-cipher room-name sector-id))))
+
 (defn load-data [filepath]
   (-> filepath
       slurp
@@ -36,5 +44,6 @@
      load-data
      (map parse-room-data)
      (filter valid-room?)
-     (map second)
-     (reduce +))
+     (map decrypt-room)
+     (filter (fn [[room-name sector-id _]] (re-matches #".*north.*" (apply str room-name)))))
+
