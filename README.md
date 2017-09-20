@@ -1,36 +1,9 @@
-# advent-of-code-2016
+# advent-of-code-2016 [![Build Status](https://travis-ci.org/querenker/advent-of-code-2016.svg?branch=master)](https://travis-ci.org/querenker/advent-of-code-2016)
 
-FIXME: description
-
-## Installation
-
-Download from http://example.com/FIXME.
-
-## Usage
-
-FIXME: explanation
-
-    $ java -jar advent-of-code-2016-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+Collection of [Advent of Code 2016](https://adventofcode.com/2016) solutions written in [Clojure](https://clojure.org/).
 
 ## License
 
-Copyright © 2017 FIXME
+Copyright © 2017 Alexander Riese
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the Eclipse Public License version 1.0
