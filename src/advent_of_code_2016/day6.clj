@@ -15,5 +15,5 @@
      (map frequencies)
      (map (partial group-by val))
      (map sort)
-     (map last)
+     (map first)
      (map val))
